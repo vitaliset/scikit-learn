@@ -792,6 +792,8 @@ def _binary_clf_curve(y_true, y_score, pos_label=None, sample_weight=None):
     # Check to make sure y_true is valid
     y_type = type_of_target(y_true, input_name="y_true")
     if not (y_type == "binary" or (y_type == "multiclass" and pos_label is not None)):
+        if y_type == "multiclass":
+            raise ValueError("In a multiclass scenario, you must pass a `pos_label`.")
         raise ValueError("{0} format is not supported".format(y_type))
 
     check_consistent_length(y_true, y_score, sample_weight)
