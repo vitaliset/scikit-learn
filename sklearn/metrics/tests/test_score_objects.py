@@ -504,7 +504,10 @@ def test_thresholded_scorers():
     X, y = make_blobs(random_state=0, centers=3)
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
     clf.fit(X_train, y_train)
-    with pytest.raises(ValueError, match="multiclass format is not supported"):
+    with pytest.raises(
+        ValueError,
+        match="multiclass scenario, you must pass a `pos_label`"
+    ):
         get_scorer("roc_auc")(clf, X_test, y_test)
 
     # test error is raised with a single class present in model

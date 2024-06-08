@@ -840,7 +840,7 @@ def test_binary_clf_curve_multiclass_error(curve_func):
     rng = check_random_state(404)
     y_true = rng.randint(0, 3, size=10)
     y_pred = rng.rand(10)
-    msg = "multiclass format is not supported"
+    msg = "multiclass scenario, you must pass a `pos_label`"
     with pytest.raises(ValueError, match=msg):
         curve_func(y_true, y_pred)
 
